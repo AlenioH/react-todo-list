@@ -1,11 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 import TodoList from './TodoList';
 import nextId from 'react-id-generator';
 
 const containerStyle = css`
-  width: 100vh;
+  width: 50vh;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -17,26 +17,38 @@ const containerStyle = css`
   margin-top: 40px;
 `;
 
+const buttonStyle = css`
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px;
+`;
+
+const inputStyle = css`
+  padding: 10px;
+  border-radius: 4px;
+`;
+
 export default function App() {
   const [toDos, setToDos] = useState([]);
 
   const textInput = useRef(''); //the task user enters is stored in this const, in () is initial value
 
-  function removeCompleted(e) {
+  function removeCompleted() {
     const newTodos = toDos.filter((item) => {
-      return item.complete === false; //what it does it removes the name value from the obj and changes true to false again
+      return item.complete === false;
     });
-    setToDos(newTodos); //mb try passing this one down too
+    setToDos(newTodos); //taking the button out of the form did the trick, it works
   }
 
-  //   // const newTodos = prevToDos.filter(function (toDos) {
-  //   //   return prevToDos.complete !== false;
-  //   return [
-  //       prevToDos.filter((obj) => {
-  //         return obj.complete !== false;
-  //       }),
-  //     ];
-  // }); doesnt work either
+  //this function shows only completed todos but there must be a way to switch to the full list again
+  function showCompleted() {
+    const newTodos = toDos.filter((item) => {
+      return item.complete === true;
+    });
+    setToDos(newTodos);
+  }
+
+  function showAll() {}
 
   function crossTodo(id) {
     // this function checks and unchecks the todo
@@ -63,28 +75,38 @@ export default function App() {
     });
 
     e.preventDefault(); //prevents reloading the page
-    textInput.current.value = ''; //clearing the value for the next todo, returns error
+    textInput.current.value = ''; //clearing the value for the next todo
   }
 
   return (
     <div css={containerStyle}>
-      <TodoList
-        todos={toDos}
-        crossTodo={crossTodo}
-        removeTodo={removeTodo}
-        removeCompleted={removeCompleted}
-      />
       <form onSubmit={addItem}>
         <input
+          css={inputStyle}
           type="text"
           placeholder="enter your todo here"
           ref={textInput}
         ></input>
-        <button type="submit">Add a todo</button>
-        <button onClick={removeCompleted}>Delete completed todos</button>
+        <button css={buttonStyle} type="submit">
+          Add a todo
+        </button>
+
         {/* <button onClick={removeAll}>Delete all</button> */}
       </form>
+      <TodoList todos={toDos} crossTodo={crossTodo} removeTodo={removeTodo} />
+      <button css={buttonStyle} onClick={removeCompleted}>
+        Delete completed todos
+      </button>
+      <button css={buttonStyle} onClick={removeCompleted}>
+        Show only active todos
+      </button>
+      <button css={buttonStyle} onClick={showCompleted}>
+        Show only completed todos
+      </button>
+      <button css={buttonStyle} onClick={showAll}>
+        Show all todos
+      </button>
       <pre>{JSON.stringify(toDos, null, 2)}</pre>
-    </div>
+    </div> //taking the remove completed button out of the form did the trick
   );
 }

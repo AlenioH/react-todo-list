@@ -8,6 +8,9 @@ const listStyle = css`
   flex-direction: column;
   width: 200px;
   margin: auto;
+  > * {
+    padding: 10px;
+  }
 `;
 
 export default function TodoList(props) {
