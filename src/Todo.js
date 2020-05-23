@@ -33,9 +33,11 @@ export default function Todo(props) {
           `}
           onClick={removeItem}
         >
-          X
+          x
         </button>
       </label>
     </div>
   );
 }
+
+//still says each child has a unique key prop, but they do have unique keys...???

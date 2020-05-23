@@ -15,7 +15,14 @@ const listStyle = css`
 export default function TodoList(props) {
   return props.todos.map((item) => {
     return (
-      <div css={listStyle}>
+      <div
+        css={listStyle}
+        // css={css`
+        //   text-decoration: ${props.todos.complete === true
+        //     ? 'line-through'
+        //     : 'none'};
+        // `}  this should cross out the text when its checked
+      >
         <Todo
           todo={item}
           key={item.id}

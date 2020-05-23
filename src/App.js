@@ -142,7 +142,7 @@ export default function App() {
         <h1
           css={css`
             text-align: center;
-            margin-top: 0;
+            margin-top: 5px;
           `}
         >
           Getting sh** done with Alenio
@@ -167,7 +167,7 @@ export default function App() {
           display: flex;
           flex-direction: column;
           position: fixed;
-          bottom: 0;
+          bottom: 40%;
           right: 0;
         `}
       >
