@@ -2,7 +2,11 @@ import React from 'react';
 
 export default function Todo(props) {
   function handleTodoClick() {
-    props.crossTodo(props.todo.id);
+    props.crossTodo(props.todo.id); // this function calls the fucntion that checks and unchecks the checkbox
+  }
+
+  function removeItem() {
+    props.removeTodo(props.todo.id); //this function calls the function that removes items
   }
 
   return (
@@ -14,8 +18,8 @@ export default function Todo(props) {
           onChange={handleTodoClick}
         />
         {props.todo.name}
+        <button onClick={removeItem}>X</button>
       </label>
-    </div> //doesnt work but at least its not broken anymore
+    </div>
   );
 }
-//need to add an onchange handler to the checked part
