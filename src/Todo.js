@@ -1,4 +1,6 @@
 import React from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
 
 export default function Todo(props) {
   function handleTodoClick() {
@@ -18,7 +20,21 @@ export default function Todo(props) {
           onChange={handleTodoClick}
         />
         {props.todo.name}
-        <button onClick={removeItem}>X</button>
+        <button
+          css={css`
+            background-color: #e17055;
+            font-weight: bold;
+            padding: 5px;
+            margin: 10px;
+            &:hover {
+              background-color: #d63031;
+              transition: background-color 0.3ms;
+            }
+          `}
+          onClick={removeItem}
+        >
+          X
+        </button>
       </label>
     </div>
   );

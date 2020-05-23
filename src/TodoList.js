@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 import Todo from './Todo';
@@ -6,11 +6,10 @@ import Todo from './Todo';
 const listStyle = css`
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  height: 100%;
   width: 200px;
   margin: auto;
-  > * {
-    padding: 10px;
-  }
 `;
 
 export default function TodoList(props) {
