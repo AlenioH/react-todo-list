@@ -157,8 +157,6 @@ export default function App() {
           <button css={buttonStyle} type="submit">
             Add a todo
           </button>
-
-          {/* <button onClick={removeAll}>Delete all</button> */}
         </form>
         <TodoList todos={toDos} crossTodo={crossTodo} removeTodo={removeTodo} />
       </div>
@@ -180,9 +178,8 @@ export default function App() {
         <button css={buttonStyle} onClick={showCompleted}>
           Show only completed todos
         </button>
-        {/* <button css={buttonStyle} onClick={showAll}>
-          Show all todos
-        </button> */}
+        <button css={buttonStyle}>Show all </button>
+        <button css={buttonStyle}>Clear all</button>
       </div>
     </div>
   );
