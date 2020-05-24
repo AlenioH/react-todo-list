@@ -55,54 +55,26 @@ export default function App() {
   //"todosInLocalStorage" is the key
   //it saves the stuff but clicking the button crashes everything
 
+  const [filter, setFilter] = useState(
+    { filter: 'all' },
+    { filter: 'completed' },
+    { filter: 'active' },
+  );
+
   useEffect(() => {
     localStorage.setItem('todosInLocalStorage', JSON.stringify(toDos));
   }, [toDos]); //this gets run every time the value is changed, so it stores new value
 
-  function showAll(toDos) {
-    //   if (toDos.complete === true) {
-    //     //not sure about this line thats supposed to go like: if the items displayed have complete set to true, then do this
-    //     setToDos((prevToDos) => {
-    //       return [...prevToDos, toDos.filter((item) => item.complete === false)];
-    //     });
-    //   } else {
-    //     setToDos((prevToDos) => {
-    //       return [...prevToDos, toDos.filter((item) => item.complete === true)];
-    //     });
-    //   }
-    // } //looks impressive but returns only NaNs....
-
-    // setToDos((prevToDos) => {
-    //   return [
-    //     ...prevToDos, //spread the already existing todos
-    //   ];
-    // }); //returns NaN
-
-    // const newTodos = removeCompleted() + showCompleted(); //doesnt do the trick either
-
-    const newTodos = JSON.parse(localStorage.getItem('todosInLocalStorage'));
-    // console.log(toDos); //doesnt really get back in time somehow....
-    setToDos(newTodos);
-    console.log(newTodos);
-  } //the function is supposed to extract again ALL of the todos and return them
+  const newTodos = JSON.parse(localStorage.getItem('todosInLocalStorage'));
+  // console.log(toDos); //doesnt really get back in time somehow....
+  setToDos(newTodos);
+  console.log(newTodos);
 
   function removeCompleted() {
     const newTodos = toDos.filter((item) => {
       return item.complete === false;
     });
-    // const notCompl =toDos.filter((item) => {
-    //   return item.complete === true;
-    // }) mb one more state var
-
     setToDos(newTodos); //taking the button out of the form did the trick, it works
-  }
-
-  //this function shows only completed todos but there must be a way to switch to the full list again
-  function showCompleted() {
-    const newTodos = toDos.filter((item) => {
-      return item.complete === true;
-    });
-    setToDos(newTodos);
   }
 
   function crossTodo(id) {
@@ -159,7 +131,12 @@ export default function App() {
             Add a todo
           </button>
         </form>
-        <TodoList todos={toDos} crossTodo={crossTodo} removeTodo={removeTodo} />
+        <TodoList
+          todos={toDos}
+          crossTodo={crossTodo}
+          removeTodo={removeTodo}
+          filter={filter}
+        />
       </div>
       <div
         css={css`
@@ -173,13 +150,21 @@ export default function App() {
         <button css={buttonStyle} onClick={removeCompleted}>
           Delete completed todos
         </button>
-        <button css={buttonStyle} onClick={removeCompleted}>
+        <button
+          css={buttonStyle}
+          onClick={() => setFilter({ filter: 'active' })}
+        >
           Show only active todos
         </button>
-        <button css={buttonStyle} onClick={showCompleted}>
+        <button
+          css={buttonStyle}
+          onClick={() => setFilter({ filter: 'completed' })}
+        >
           Show only completed todos
         </button>
-        <button css={buttonStyle}>Show all </button>
+        <button css={buttonStyle} onClick={() => setFilter({ filter: 'all' })}>
+          Show all{' '}
+        </button>
         <button css={buttonStyle}>Clear all</button>
       </div>
     </div>
