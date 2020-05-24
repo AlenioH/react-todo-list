@@ -143,6 +143,7 @@ export default function App() {
           css={css`
             text-align: center;
             margin-top: 5px;
+            text-shadow: 2px 2px grey;
           `}
         >
           Getting sh** done with Alenio

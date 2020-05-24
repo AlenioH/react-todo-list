@@ -33,5 +33,5 @@ export default function TodoList(props) {
         </div>
       ); //key={Date.now()} didnt really work, after 2 todos starts returning error and duplicating entries
     })
-    .filter((item) => item.complete === true);
+    .filter((item) => item.complete === true); //so this bit should only get run when a certain button is clicked
 }
