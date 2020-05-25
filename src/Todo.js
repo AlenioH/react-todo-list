@@ -3,6 +3,11 @@ import React from 'react';
 import { css, jsx } from '@emotion/core';
 
 export default function Todo(props) {
+  const itemStyle = () => css`
+    text-decoration: ${props.todo.complete === true ? 'line-through' : 'none'};
+    color: ${props.todo.complete === true ? '#636e72' : 'inherit'};
+  `;
+
   function handleTodoClick() {
     props.crossTodo(props.todo.id); // this function calls the fucntion that checks and unchecks the checkbox
   }
@@ -12,7 +17,7 @@ export default function Todo(props) {
   }
 
   return (
-    <div>
+    <div css={itemStyle}>
       <label>
         <input
           type="checkbox"
@@ -40,4 +45,4 @@ export default function Todo(props) {
   );
 }
 
-//still says each child has a unique key prop, but they do have unique keys...???
+

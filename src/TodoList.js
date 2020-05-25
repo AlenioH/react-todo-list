@@ -12,18 +12,24 @@ const listStyle = css`
   margin: auto;
 `;
 
+//so filtering happens first, what filter function returns = is true or false, if false items will not be returned, if true they will be,
+//for the final else part the filtering returns all of the items, which are then mapped over to return all of the items returned by the filter. WOWWWWWW
+
 export default function TodoList(props) {
   return props.todos
+    .filter((item) => {
+      if (props.filter === 'active') {
+        return item.complete !== true;
+      } else if (props.filter === 'completed') {
+        return item.complete === true;
+      } else {
+        return true;
+      }
+    })
+
     .map((item) => {
       return (
-        <div
-          css={listStyle}
-          // css={css`
-          //   text-decoration: ${props.todos.complete === true
-          //     ? 'line-through'
-          //     : 'none'};
-          // `}  this should cross out the text when its checked
-        >
+        <div css={listStyle}>
           <Todo
             todo={item}
             key={item.id}
@@ -31,7 +37,6 @@ export default function TodoList(props) {
             removeTodo={props.removeTodo}
           />
         </div>
-      ); //key={Date.now()} didnt really work, after 2 todos starts returning error and duplicating entries
-    })
-    .filter((item) => item.complete === true); //so this bit should only get run when a certain button is clicked
+      );
+    });
 }
