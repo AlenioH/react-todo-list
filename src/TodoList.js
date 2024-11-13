@@ -1,15 +1,12 @@
-import React from 'react';
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import Todo from './Todo';
-import nextId from 'react-id-generator';
 
 const listStyle = css`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  height: 100%;
-  width: 200px;
+  width: 100%;
   margin: auto;
 `;
 
@@ -18,7 +15,7 @@ const listStyle = css`
 
 export default function TodoList(props) {
   return (
-    <div>
+    <>
       {props.todos
         .filter((item) => {
           if (props.filter === 'active') {
@@ -41,6 +38,6 @@ export default function TodoList(props) {
             </div>
           );
         })}
-    </div>
+    </>
   );
 }

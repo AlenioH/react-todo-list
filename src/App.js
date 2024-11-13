@@ -1,51 +1,62 @@
-import React, { useState, useRef, useEffect } from 'react';
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+/** @jsxImportSource @emotion/react */
+import { useState, useRef, useEffect } from 'react';
+import { css } from '@emotion/react';
 import TodoList from './TodoList';
-// import nextId from 'react-id-generator';
-import bgImg from './bg.jpg';
 import nextId from 'react-id-generator';
 
 const divBg = css`
-  background-image: url(${bgImg});
+  background: linear-gradient(45deg, #ff9a8b, #ff6a88, #d4a5a5, #5e4fa2, #7e7fd1);
   width: 100%;
   height: 100vh;
-  background-size: cover;
-  background-position: center;
   font-family: 'Poppins', sans-serif;
-  font-family: 'Work Sans', sans-serif;
+  color: #333;
+  padding: 2rem;
 `;
 
 const containerStyle = css`
-  width: 50vh;
-  font-family: inherit;
+  padding: 2rem;
+  width: 80%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: auto;
   display: flex;
   flex-direction: column;
   border: 2px dotted black;
-  padding: 20px;
   align-items: center;
   justify-content: center;
   line-height: 2;
 `;
 
 const buttonStyle = css`
-  font-family: inherit;
   padding: 10px;
   border-radius: 4px;
   margin: 10px;
   font-weight: bold;
-  background-color: #dfe6e9;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(45deg, #ff9a8b, #ff6a88);
   &:hover {
-    background-color: #b2bec3;
-    transition: background-color 0.3s;
+    background: #7e7fd1;
+    transition: background-color 0.5s;
   }
 `;
 
+const inputContainterStyle=css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 1rem;
+  height: 2rem ;
+
+`
+
 const inputStyle = css`
-  font-family: inherit;
   padding: 10px;
   border-radius: 4px;
+  width: 100%;
 `;
 
 export default function App() {
@@ -64,21 +75,21 @@ export default function App() {
     const newTodos = toDos.filter((item) => {
       return item.complete === false;
     });
-    setToDos(newTodos); //taking the button out of the form did the trick, it works
+    setToDos(newTodos);
   }
 
   function checkTodo(id) {
     // this function checks and unchecks the todo
-    const newTodos = [...toDos]; //creates a copy so we don't change the existing state variable directly
+    const newTodos = [...toDos]; //creates a copy so we don't mutate the existing state variable directly
     const todo = newTodos.find((item) => item.id === id); //finding the todo we're trying to modify by id
-    todo.complete = !todo.complete; //to switch from incomplete to complete, if i just say "true" i cant change it back
+    todo.complete = !todo.complete; //to switch from incomplete to complete
     setToDos(newTodos);
   }
 
   function removeTodo(id) {
     const newTodos = toDos.filter((item) => item.id !== id);
     setToDos(newTodos);
-  } //the function returns the list of todos without the item with the entered id
+  }
 
   function clearAll() {
     setToDos([]);
@@ -117,7 +128,7 @@ export default function App() {
         >
           Getting sh** done with Alenio
         </h1>
-        <form onSubmit={addItem}>
+        <form onSubmit={addItem} css={inputContainterStyle}>
           <input
             css={inputStyle}
             type="text"
@@ -125,7 +136,7 @@ export default function App() {
             ref={textInput}
           ></input>
           <button css={buttonStyle} type="submit">
-            Add a todo
+            Add
           </button>
         </form>
         <TodoList

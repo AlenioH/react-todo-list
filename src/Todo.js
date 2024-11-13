@@ -1,11 +1,15 @@
-import React from 'react';
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 
 export default function Todo(props) {
   const itemStyle = () => css`
     text-decoration: ${props.todo.complete === true ? 'line-through' : 'none'};
     color: ${props.todo.complete === true ? '#636e72' : 'inherit'};
+    border-bottom: 2px solid #7e7fd1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
   `;
 
   function handleTodoClick() {
@@ -25,6 +29,7 @@ export default function Todo(props) {
           onChange={handleTodoClick}
         />
         {props.todo.name}
+      </label>
         <button
           css={css`
             background-color: #e17055;
@@ -40,7 +45,6 @@ export default function Todo(props) {
         >
           x
         </button>
-      </label>
     </div>
   );
 }
