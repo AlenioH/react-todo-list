@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { css } from '@emotion/react';
 import TodoList from './TodoList';
 import nextId from 'react-id-generator';
+import Button from './Button';
 
 const divBg = css`
   background: linear-gradient(45deg, #ff9a8b, #ff6a88, #d4a5a5, #5e4fa2, #7e7fd1);
@@ -155,26 +156,12 @@ export default function App() {
           right: 0;
         `}
       >
-        <button css={buttonStyle} onClick={removeCompleted}>
-          Clear completed todos
-        </button>
-        <button css={buttonStyle} onClick={() => setFilter('active')}>
-          Show only active todos
-        </button>
-        <button css={buttonStyle} onClick={() => setFilter('completed')}>
-          Show only completed todos
-        </button>
-        <button css={buttonStyle} onClick={() => setFilter('all')}>
-          Show all{' '}
-        </button>
-        <button css={buttonStyle} onClick={clearAll}>
-          Clear all
-        </button>
+        <Button style={buttonStyle} label="Clear completed TEST" action={removeCompleted} />
+        <Button style={buttonStyle} label="Show only active" action={() => setFilter('active')} />
+        <Button style={buttonStyle} label="Show only completed" action={() => setFilter('completed')} />
+        <Button style={buttonStyle} label="Show all" action={() => setFilter('all')} />
+        <Button style={buttonStyle} label="Clear all" action={clearAll} />
       </div>
     </div>
   );
 }
-
-// <pre>{JSON.stringify(toDos, null, 2)}</pre> for debugging
-
-//still says each child has a unique key prop, but they do have unique keys...???
