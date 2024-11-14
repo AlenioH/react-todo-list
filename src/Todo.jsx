@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
-export default function Todo(props) {
+export default function Todo({todo, crossTodo, removeTodo}) {
   const itemStyle = () => css`
-    text-decoration: ${props.todo.complete === true ? 'line-through' : 'none'};
-    color: ${props.todo.complete === true ? '#636e72' : 'inherit'};
+    text-decoration: ${todo.complete === true ? 'line-through' : 'none'};
+    color: ${todo.complete === true ? '#636e72' : 'inherit'};
     border-bottom: 2px solid #7e7fd1;
     display: flex;
     justify-content: space-between;
@@ -13,11 +13,11 @@ export default function Todo(props) {
   `;
 
   function handleTodoClick() {
-    props.crossTodo(props.todo.id); // this function calls the fucntion that checks and unchecks the checkbox
+    crossTodo(todo.id); // this function calls the fucntion that checks and unchecks the checkbox
   }
 
   function removeItem() {
-    props.removeTodo(props.todo.id); //this function calls the function that removes items
+    removeTodo(todo.id); //this function calls the function that removes items
   }
 
   return (
@@ -25,10 +25,10 @@ export default function Todo(props) {
       <label>
         <input
           type="checkbox"
-          checked={props.todo.complete}
+          checked={todo.complete}
           onChange={handleTodoClick}
         />
-        {props.todo.name}
+        {todo.name}
       </label>
         <button
           css={css`
