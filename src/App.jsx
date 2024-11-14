@@ -87,6 +87,10 @@ export default function App() {
     setToDos(newTodos);
   }
 
+  function editTodo(id) {
+   //TODO:
+  }
+
   function removeTodo(id) {
     const newTodos = toDos.filter((item) => item.id !== id);
     setToDos(newTodos);
@@ -144,6 +148,7 @@ export default function App() {
           todos={toDos}
           crossTodo={checkTodo}
           removeTodo={removeTodo}
+          editTodo={editTodo}
           filter={filter}
         />
       </div>
