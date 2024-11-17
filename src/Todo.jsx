@@ -40,15 +40,16 @@ export default function Todo({todo, crossTodo, removeTodo, toggleEditModal}) {
 
   return (
     <div css={itemStyle}>
-      <label>
-        <input
-          type="checkbox"
-          checked={todo.complete}
-          onChange={() => crossTodo(todo.id)}
-        />
+      <input
+        id={`${todo.id}-checkbox`}
+        type="checkbox"
+        checked={todo.complete}
+        onChange={() => crossTodo(todo.id)}
+      />
+      <label for={`${todo.id}-checkbox`} css={css`max-width: 65%; overflow: hidden; margin-right: auto; margin-left: 5px;`}>
         {todo.name}
       </label>
-      <div>
+      <div css={css`display: flex;`}>
         <Button style={[buttonStyles, editButtonStyles]} label={<MdOutlineEdit size={18}/>} action={() => toggleEditModal(todo)} />
         <Button style={[buttonStyles, deleteButtonStyles]} label={<MdDeleteOutline size={18} />} action={()=> removeTodo(todo.id)} />
       </div>

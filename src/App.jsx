@@ -6,12 +6,12 @@ import Button from './Button';
 import EditModal from './EditModal';
 
 const divBg = css`
-  background: linear-gradient(45deg, #ff9a8b, #ff6a88, #d4a5a5, #5e4fa2, #7e7fd1);
-  width: 100%;
-  height: 100%;
-  font-family: 'Poppins', sans-serif;
-  color: #333;
-  display: flex;
+background: linear-gradient(45deg, #ff9a8b, #ff6a88, #d4a5a5, #5e4fa2, #7e7fd1);
+width: 100%;
+min-height: 100%;
+font-family: 'Poppins', sans-serif;
+color: #333;
+display: flex;
 `;
 
 const containerStyle = css`
@@ -73,6 +73,13 @@ const inputStyle = css`
   border-radius: 4px;
   width: 100%;
 `;
+
+const filterButtonsContainer = css`
+  @media (max-width: 440px) {
+    display: flex;
+    flex-direction: column;
+  }
+`
 
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -170,11 +177,13 @@ export default function App() {
               Add
             </button>
           </form>
-          <div>
-            <Button style={ghostButtonStyle} label="Only active" action={() => setFilter('active')} />
-            <Button style={ghostButtonStyle} label="Only completed" action={() => setFilter('completed')} />
-            <Button style={ghostButtonStyle} label="All" action={() => setFilter('all')} />
-          </div>
+          {toDos.length > 0 &&
+            <div css={filterButtonsContainer}>
+              <Button style={ghostButtonStyle} label="Only active" action={() => setFilter('active')} />
+              <Button style={ghostButtonStyle} label="Only completed" action={() => setFilter('completed')} />
+              <Button style={ghostButtonStyle} label="All" action={() => setFilter('all')} />
+            </div>
+          }
           <TodoList
             todos={toDos}
             crossTodo={checkTodo}
@@ -183,10 +192,12 @@ export default function App() {
             toggleEditModal={toggleEditModal}
             filter={filter}
           />
-          <div css={css`display: flex; flex-direction: column; margin-top: 10px;`}>
-            <Button style={ghostButtonStyle} label="Clear completed" action={removeCompleted} />
-            <Button style={ghostButtonStyle} label="Clear all" action={clearAll} />
-          </div>
+          {toDos.length > 0 &&
+            <div css={css`display: flex; flex-direction: column; margin-top: 10px;`}>
+              <Button style={ghostButtonStyle} label="Clear completed" action={removeCompleted} />
+              <Button style={ghostButtonStyle} label="Clear all" action={clearAll} />
+            </div>
+          }
         </div>
         <div
           css={css`
