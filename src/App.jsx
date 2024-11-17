@@ -4,14 +4,15 @@ import { css } from '@emotion/react';
 import TodoList from './TodoList';
 import nextId from 'react-id-generator';
 import Button from './Button';
+import EditModal from './EditModal';
 
 const divBg = css`
   background: linear-gradient(45deg, #ff9a8b, #ff6a88, #d4a5a5, #5e4fa2, #7e7fd1);
   width: 100%;
-  height: 100vh;
+  height: 100%;
   font-family: 'Poppins', sans-serif;
   color: #333;
-  padding: 2rem;
+  display: flex;
 `;
 
 const containerStyle = css`
@@ -61,12 +62,15 @@ const inputStyle = css`
 `;
 
 export default function App() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [openTodo, setOpenTodo] = useState('');
   const [toDos, setToDos] = useState(
     JSON.parse(localStorage.getItem('todosInLocalStorage')) || [],
   ); //function as initial value - checks if there is smth in the storage, if not - uses the empty array
   //"todosInLocalStorage" is the key
-
   const [filter, setFilter] = useState('all');
+
+  const textInput = useRef(''); //the todo user enters is stored in this const, in () is initial value
 
   useEffect(() => {
     localStorage.setItem('todosInLocalStorage', JSON.stringify(toDos));
@@ -87,8 +91,17 @@ export default function App() {
     setToDos(newTodos);
   }
 
-  function editTodo(id) {
-   //TODO:
+  function editTodo(id, content) {
+    const newTodos = [...toDos];
+    const todo = newTodos.find((item) => item.id === id);
+    todo.name = content;
+    setToDos(newTodos);
+    setModalOpen(!modalOpen);
+  }
+
+  function toggleEditModal(todo) {
+    setModalOpen(!modalOpen);
+    setOpenTodo(todo);
   }
 
   function removeTodo(id) {
@@ -99,8 +112,6 @@ export default function App() {
   function clearAll() {
     setToDos([]);
   }
-
-  const textInput = useRef(''); //the todo user enters is stored in this const, in () is initial value
 
   //this function adds todos to the list
   function addItem(e) {
@@ -122,51 +133,55 @@ export default function App() {
   }
 
   return (
-    <div css={divBg}>
-      <div css={containerStyle}>
-        <h1
+    <>
+      {modalOpen && <EditModal toggleEditModal={toggleEditModal} todo={openTodo} editTodo={editTodo}/>}
+      <div css={divBg}>
+        <div css={containerStyle}>
+          <h1
+            css={css`
+              text-align: center;
+              margin-top: 5px;
+              text-shadow: 2px 2px grey;
+            `}
+          >
+            Getting sh** done with Alenio
+          </h1>
+          <form onSubmit={addItem} css={inputContainterStyle}>
+            <input
+              css={inputStyle}
+              type="text"
+              placeholder="enter your todo here"
+              ref={textInput}
+            ></input>
+            <button css={buttonStyle} type="submit">
+              Add
+            </button>
+          </form>
+          <TodoList
+            todos={toDos}
+            crossTodo={checkTodo}
+            removeTodo={removeTodo}
+            editTodo={editTodo}
+            toggleEditModal={toggleEditModal}
+            filter={filter}
+          />
+        </div>
+        <div
           css={css`
-            text-align: center;
-            margin-top: 5px;
-            text-shadow: 2px 2px grey;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            bottom: 40%;
+            right: 0;
           `}
         >
-          Getting sh** done with Alenio
-        </h1>
-        <form onSubmit={addItem} css={inputContainterStyle}>
-          <input
-            css={inputStyle}
-            type="text"
-            placeholder="enter your todo here"
-            ref={textInput}
-          ></input>
-          <button css={buttonStyle} type="submit">
-            Add
-          </button>
-        </form>
-        <TodoList
-          todos={toDos}
-          crossTodo={checkTodo}
-          removeTodo={removeTodo}
-          editTodo={editTodo}
-          filter={filter}
-        />
+          <Button style={buttonStyle} label="Clear completed TEST" action={removeCompleted} />
+          <Button style={buttonStyle} label="Show only active" action={() => setFilter('active')} />
+          <Button style={buttonStyle} label="Show only completed" action={() => setFilter('completed')} />
+          <Button style={buttonStyle} label="Show all" action={() => setFilter('all')} />
+          <Button style={buttonStyle} label="Clear all" action={clearAll} />
+        </div>
       </div>
-      <div
-        css={css`
-          display: flex;
-          flex-direction: column;
-          position: fixed;
-          bottom: 40%;
-          right: 0;
-        `}
-      >
-        <Button style={buttonStyle} label="Clear completed TEST" action={removeCompleted} />
-        <Button style={buttonStyle} label="Show only active" action={() => setFilter('active')} />
-        <Button style={buttonStyle} label="Show only completed" action={() => setFilter('completed')} />
-        <Button style={buttonStyle} label="Show all" action={() => setFilter('all')} />
-        <Button style={buttonStyle} label="Clear all" action={clearAll} />
-      </div>
-    </div>
+      </>
   );
 }

@@ -34,7 +34,7 @@ export default function TodoList(props) {
                 todo={item}
                 crossTodo={props.crossTodo}
                 removeTodo={props.removeTodo}
-                editTodo={props.editTodo}
+                toggleEditModal={props.toggleEditModal}
               />
             </div>
           );

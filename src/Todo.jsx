@@ -4,7 +4,7 @@ import Button from './Button';
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 
 
-export default function Todo({todo, crossTodo, removeTodo, editTodo}) {
+export default function Todo({todo, crossTodo, removeTodo, toggleEditModal}) {
   const itemStyle = () => css`
     text-decoration: ${todo.complete === true ? 'line-through' : 'none'};
     color: ${todo.complete === true ? '#636e72' : 'inherit'};
@@ -49,7 +49,7 @@ export default function Todo({todo, crossTodo, removeTodo, editTodo}) {
         {todo.name}
       </label>
       <div>
-        <Button style={[buttonStyles, editButtonStyles]} label={<MdOutlineEdit size={18}/>} action={() => crossTodo(todo.id)} />
+        <Button style={[buttonStyles, editButtonStyles]} label={<MdOutlineEdit size={18}/>} action={() => toggleEditModal(todo)} />
         <Button style={[buttonStyles, deleteButtonStyles]} label={<MdDeleteOutline size={18} />} action={()=> removeTodo(todo.id)} />
       </div>
     </div>
