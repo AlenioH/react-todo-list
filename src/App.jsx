@@ -174,7 +174,7 @@ export default function App() {
             right: 0;
           `}
         >
-          <Button style={buttonStyle} label="Clear completed TEST" action={removeCompleted} />
+          <Button style={buttonStyle} label="Clear completed" action={removeCompleted} />
           <Button style={buttonStyle} label="Show only active" action={() => setFilter('active')} />
           <Button style={buttonStyle} label="Show only completed" action={() => setFilter('completed')} />
           <Button style={buttonStyle} label="Show all" action={() => setFilter('all')} />

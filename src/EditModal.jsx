@@ -24,6 +24,12 @@ const containerStyles = css`
   border-radius: 5px;
 `;
 
+const formStyles = css`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
+
 const inputStyles = css`
   margin-top: auto;
   margin-right: 1rem;
@@ -33,13 +39,13 @@ const inputStyles = css`
   padding: 0.5rem;
   border-radius: 0.3rem;
   font-size: 1rem;
-`
+`;
 
 const buttonsContainer = css`
   margin: auto 0.5rem 0.5rem auto;
   display: flex;
   gap: 1rem;
-`
+`;
 const buttonStyles = css`
     background-color: inherit;
     padding: 5px 8px;
@@ -65,15 +71,16 @@ export default function EditModal({toggleEditModal, editTodo, todo}) {
 
   const textInput = useRef(null);
 
-
   return (
     <div css={overlayStyles}>
       <div css={containerStyles}>
-        <input css={inputStyles} ref={textInput}  type="text" defaultValue={todo.name} onKeyUp={(e) => {if (e.key === 'Enter') editTodo(todo.id, textInput.current.value) }}/>
-        <div css={buttonsContainer}>
-          <Button label="Cancel" action={toggleEditModal} style={[buttonStyles, cancelButtonStyles]}/>
-          <Button label="Save" action={() => editTodo(todo.id, textInput.current.value)} style={[buttonStyles, saveButtonStyles]}/>
-        </div>
+        <form css={formStyles} onSubmit={() => editTodo(todo.id, textInput.current.value)}>
+          <input css={inputStyles} ref={textInput}  type="text" defaultValue={todo.name}/>
+          <div css={buttonsContainer}>
+            <Button label="Cancel" action={toggleEditModal} style={[buttonStyles, cancelButtonStyles]}/>
+            <Button type="submit" label="Save" action={() => editTodo(todo.id, textInput.current.value)} style={[buttonStyles, saveButtonStyles]}/>
+          </div>
+        </form>
       </div>
     </div>
   );
