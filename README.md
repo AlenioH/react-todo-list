@@ -1,68 +1,55 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React To-Do App
 
-## Available Scripts
+A simple yet functional to-do list application built with React, providing features like adding, editing, and filtering tasks. The app utilizes **Emotion** for styling and is **fully responsive**, ensuring it works seamlessly on various devices.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Add a new task**: Easily add a new to-do item to the list.
+- **Filter tasks**: Filter tasks by their status:
+  - Show **only completed** tasks.
+  - Show **only active** tasks.
+- **Edit tasks**: You can edit the name of an existing to-do.
+- **Responsive Design**: The app adjusts beautifully to different screen sizes (mobile, tablet, desktop).
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Tech Stack
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- **React**: A JavaScript library for building user interfaces.
+- **Emotion**: A performant and flexible CSS-in-JS library for styling React components.
+- **JavaScript (ES6+)**: Modern JavaScript for clean, readable code.
 
-### `npm test`
+## How to Start the Project
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To get started with the project, follow these steps:
 
-### `npm build`
+### 1. Clone the Repository
+First, clone the repository to your local machine using the following command:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone https://github.com/your-username/react-todo-app.git
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### 2. Install Dependencies
+Navigate into the project directory and install the required dependencies using
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+cd react-todo-app
+npm install
+```
 
-### `npm eject`
+### 3. Start the Development Server
+Once the dependencies are installed, you can start the development server:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+npm start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This will run the app in development mode. Open your browser and go to http://localhost:3000 to view the app.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 4. Building for Production
+To create an optimized production build, use the following command:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+npm run build
+```
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This will build the app for production, minimizing the code and optimizing performance.
