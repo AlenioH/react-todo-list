@@ -2,7 +2,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { css } from '@emotion/react';
 import TodoList from './TodoList';
-import nextId from 'react-id-generator';
 import Button from './Button';
 import EditModal from './EditModal';
 
@@ -121,7 +120,7 @@ export default function App() {
       setToDos((prevToDos) => {
         return [
           ...prevToDos, //spread the already existing todos and add the new one
-          { name: newTodoName, id: nextId(), complete: false },
+          { name: newTodoName, id: crypto.randomUUID(), complete: false },
         ];
       });
       setFilter('all'); //sets the filter variable to "all"
