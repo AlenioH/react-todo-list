@@ -30,6 +30,7 @@ const containerStyle = css`
   line-height: 2;
 `;
 
+
 const buttonStyle = css`
   padding: 10px;
   border-radius: 4px;
@@ -41,6 +42,19 @@ const buttonStyle = css`
   &:hover {
     background: #7e7fd1;
     transition: background-color 0.5s;
+  }
+`;
+
+const ghostButtonStyle = css`
+  background: transparent;
+  border: 1px solid #d4a5a5;
+  color: #7e7fd1;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin: 10px;
+  cursor: pointer;
+  &:hover {
+    background: rgba(126, 127, 209, 0.1);
   }
 `;
 
@@ -156,6 +170,11 @@ export default function App() {
               Add
             </button>
           </form>
+          <div>
+            <Button style={ghostButtonStyle} label="Only active" action={() => setFilter('active')} />
+            <Button style={ghostButtonStyle} label="Only completed" action={() => setFilter('completed')} />
+            <Button style={ghostButtonStyle} label="All" action={() => setFilter('all')} />
+          </div>
           <TodoList
             todos={toDos}
             crossTodo={checkTodo}
@@ -164,6 +183,10 @@ export default function App() {
             toggleEditModal={toggleEditModal}
             filter={filter}
           />
+          <div css={css`display: flex; flex-direction: column; margin-top: 10px;`}>
+            <Button style={ghostButtonStyle} label="Clear completed" action={removeCompleted} />
+            <Button style={ghostButtonStyle} label="Clear all" action={clearAll} />
+          </div>
         </div>
         <div
           css={css`
@@ -174,11 +197,7 @@ export default function App() {
             right: 0;
           `}
         >
-          <Button style={buttonStyle} label="Clear completed" action={removeCompleted} />
-          <Button style={buttonStyle} label="Show only active" action={() => setFilter('active')} />
-          <Button style={buttonStyle} label="Show only completed" action={() => setFilter('completed')} />
-          <Button style={buttonStyle} label="Show all" action={() => setFilter('all')} />
-          <Button style={buttonStyle} label="Clear all" action={clearAll} />
+
         </div>
       </div>
       </>
